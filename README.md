@@ -3,7 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/dumi123.svg?style=flat)](https://npmjs.org/package/dumi123)
 [![NPM downloads](http://img.shields.io/npm/dm/dumi123.svg?style=flat)](https://npmjs.org/package/dumi123)
 
-uiComps & jsUtils
+A react library developed with dumi
 
 ## Usage
 
