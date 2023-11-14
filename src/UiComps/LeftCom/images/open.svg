@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="56px" viewBox="0 0 32 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>向右收起</title>
+    <g id="向右收起" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-41备份-2">
+            <rect id="矩形" fill="#2C51B3" x="0" y="0" width="32" height="56"></rect>
+            <g id="形状结合" transform="translate(0.000000, 12.000000)" fill="#FFFFFF">
+                <path d="M5,26 C4.44771525,26 4,25.5522847 4,25 C4,24.4477153 4.44771525,24 5,24 L22,24 L22,7 C22,6.44771525 22.4477153,6 23,6 C23.5522847,6 24,6.44771525 24,7 L24,25 L24,25 C24,25.5128358 23.6139598,25.9355072 23.1166211,25.9932723 L23,26 L23,26 L5,26 Z" transform="translate(14.000000, 16.000000) rotate(-45.000000) translate(-14.000000, -16.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
