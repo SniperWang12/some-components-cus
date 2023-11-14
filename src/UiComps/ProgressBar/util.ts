@@ -3,9 +3,9 @@
  * @Author bin_wang
  */
 
-import { WaterResampleAnimation } from '@ys/dte'
-import { Timeout } from 'ahooks/lib/useRequest/src/types'
-import { makeAutoObservable } from 'mobx'
+// import { any } from '@ys/dte'
+import { Timeout } from 'ahooks/lib/useRequest/src/types';
+import { makeAutoObservable } from 'mobx';
 
 /**
  * 水动力播放相干对象
@@ -14,30 +14,30 @@ export class WaterSimAnimationPlayUtil {
   /**
    * 水动力对象
    */
-  water!: WaterResampleAnimation
+  water!: any; //WaterResampleAnimation
   /**
    * 当前帧
    */
-  currFrameIndex: number = 0
+  currFrameIndex: number = 0;
   /**
    * 总帧数
    */
-  sumFrames: number = 0
+  sumFrames: number = 0;
 
   /**
    * 是否正在播放
    */
-  isPlaying: boolean = false
+  isPlaying: boolean = false;
 
   /**
    * 播放过程中获取帧数的interval
    */
-  interval: Timeout | null = null
+  interval: Timeout | null = null;
 
-  constructor(water: WaterResampleAnimation) {
-    makeAutoObservable(this)
-    this.water = water
-    this.sumFrames = water._sumFrames
+  constructor(water: any) {
+    makeAutoObservable(this);
+    this.water = water;
+    this.sumFrames = water._sumFrames;
   }
 
   /**
@@ -46,38 +46,41 @@ export class WaterSimAnimationPlayUtil {
    * @returns
    */
   jump2SomeFrameIndex(e: number) {
-    if (e > this.sumFrames) return
-    this.isPlaying && this.pause()
-    this.water?.goto(e)
-    this.currFrameIndex = e
+    if (e > this.sumFrames) return;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    this.isPlaying && this.pause();
+    this.water?.goto(e);
+    this.currFrameIndex = e;
   }
 
   /**
    * 播放功能
    */
   play() {
-    let _this = this
-    _this.water.play()
-    _this.isPlaying = true
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let _this = this;
+    _this.water.play();
+    _this.isPlaying = true;
     this.interval = setInterval(() => {
-      _this.currFrameIndex = _this.water.getCurrentFrameIndex()
+      _this.currFrameIndex = _this.water.getCurrentFrameIndex();
+      // eslint-disable-next-line eqeqeq
       if (_this.currFrameIndex == _this.water._sumFrames - 1) {
-        this.pause()
+        this.pause();
         setTimeout(() => {
-          this.reset()
-        }, 1500)
+          this.reset();
+        }, 1500);
       }
-    }, 80)
+    }, 80);
   }
   /**
    * 暂停
    */
   pause() {
-    this.water.pause()
-    this.isPlaying = false
+    this.water.pause();
+    this.isPlaying = false;
     if (this.interval) {
-      clearInterval(this.interval)
-      this.interval = null
+      clearInterval(this.interval);
+      this.interval = null;
     }
   }
 
@@ -86,8 +89,8 @@ export class WaterSimAnimationPlayUtil {
    */
   dispose() {
     if (this.interval) {
-      clearInterval(this.interval)
-      this.interval = null
+      clearInterval(this.interval);
+      this.interval = null;
     }
   }
 
@@ -95,36 +98,38 @@ export class WaterSimAnimationPlayUtil {
    * 重置功能
    */
   reset() {
-    this.isPlaying = false
-    this.water.pause()
+    this.isPlaying = false;
+    this.water.pause();
     if (this.interval) {
-      clearInterval(this.interval)
-      this.interval = null
+      clearInterval(this.interval);
+      this.interval = null;
     }
-    this.water.goto(0)
-    this.currFrameIndex = 0
+    this.water.goto(0);
+    this.currFrameIndex = 0;
   }
 
   /**
    * 下一帧
    */
   forward() {
-    this.isPlaying = false
-    if (this.currFrameIndex == this.sumFrames - 1) return
-    this.water.pause()
-    this.water.forward()
-    this.currFrameIndex++
+    this.isPlaying = false;
+    // eslint-disable-next-line eqeqeq
+    if (this.currFrameIndex == this.sumFrames - 1) return;
+    this.water.pause();
+    this.water.forward();
+    this.currFrameIndex++;
   }
 
   /**
    * 上一帧
    */
   backward() {
-    this.isPlaying = false
-    if (this.currFrameIndex == 0) return
-    this.water.pause()
-    this.water.backward()
-    this.currFrameIndex--
+    this.isPlaying = false;
+    // eslint-disable-next-line eqeqeq
+    if (this.currFrameIndex == 0) return;
+    this.water.pause();
+    this.water.backward();
+    this.currFrameIndex--;
   }
 
   /**
@@ -132,15 +137,15 @@ export class WaterSimAnimationPlayUtil {
    */
   playOrPause() {
     if (this.isPlaying) {
-      this.pause()
+      this.pause();
     } else {
-      this.play()
+      this.play();
     }
   }
 
   resize() {
-    this.currFrameIndex = 0
-    this.water.goto(0)
+    this.currFrameIndex = 0;
+    this.water.goto(0);
   }
 }
 
@@ -149,5 +154,5 @@ export const suggestTimeInterval = {
   12: 2 * 60,
   6: 1 * 60,
   3: 0.5 * 60,
-  1: 10
-}
+  1: 10,
+};
