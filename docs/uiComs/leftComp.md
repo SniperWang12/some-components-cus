@@ -6,7 +6,7 @@
     order: 0
 ---
 
-<code src="@/UiComps/LeftCom/LeftComDemo.tsx" transform={true} description="使用样例">简易 demo</code>
+<code src="@/UiComps/LeftCom/LeftComDemo.tsx" transform={true}></code>
 
 **API**
 | 参数 | 说明 | 类型 | 默认值 |

@@ -2,146 +2,6 @@ import { useSafeState, useUpdateEffect } from 'ahooks';
 import React from 'react';
 import styled from 'styled-components';
 
-/**
- * children legend组件
- * contentProp
- */
-interface LeftComProps {
-  /**
-   * 是否在收起时销毁传进去的子组件
-   */
-  destroyOnClose?: boolean; // 收起的时候是否销毁children元素
-  /**
-   * 最外层样式修正
-   */
-  outerStyle?: React.CSSProperties;
-  contentProp: {
-    // 内容部分的组件
-    width?: number; // 内容部分宽度
-    height?: number; // 内容部分高度
-    children: JSX.Element | null; // 内容组件
-    style?: React.CSSProperties; // content 样式
-  };
-  legendProp?: {
-    // 左侧legend
-    marginLeft: number; // legend距离内容的距离
-    content: {
-      children: JSX.Element | null; // 内容组件
-      style?: React.CSSProperties; // 其他样式
-    }[];
-  };
-  hiddenSideBar?: {
-    isShow?: boolean; // 是否展示
-    isShowDecoratorBar?: boolean; // 是否展示装饰条
-    decoratorChildren?: JSX.Element | null; // 按钮组件
-    btnOpenImgUrl?: string; // 组件
-    btnCloseImgUrl?: string; // 组件
-  }; // 收缩按钮的内容
-  isHideLeft?: boolean; // 是否隐藏侧边栏
-  handleLeftShowChange?: Function; // 侧边栏展开或者显示的回调函数
-}
-// 左侧样式框架
-const LeftCom = ({
-  outerStyle = {},
-  destroyOnClose = false,
-  contentProp = {
-    children: null,
-    style: {},
-  },
-  legendProp = {
-    marginLeft: 0,
-    content: [],
-  },
-  hiddenSideBar = {
-    isShow: false,
-    decoratorChildren: null,
-    isShowDecoratorBar: true,
-  },
-  isHideLeft,
-  handleLeftShowChange,
-}: LeftComProps) => {
-  const [isOpen, setIsOpen] = useSafeState(true);
-  useUpdateEffect(() => {
-    if (isHideLeft != undefined) setIsOpen(!isHideLeft);
-  }, [isHideLeft]);
-  useUpdateEffect(() => {
-    handleLeftShowChange && handleLeftShowChange(isOpen);
-  }, [isOpen]);
-
-  const imgObj = {
-    open: require('./images/open.png'),
-    close: require('./images/close.png'),
-  };
-
-  return (
-    <Wrapper
-      style={outerStyle}
-      marginLeft={legendProp?.marginLeft || 0}
-      isOpen={isOpen}
-      contentWidth={contentProp.width || 480}
-      contentHeight={contentProp.height || 960}
-    >
-      <div
-        className={[
-          `content transform-x_time`,
-          isOpen ? 'transform_in' : 'left-transform_out',
-        ].join(' ')}
-        style={contentProp.style}
-      >
-        {destroyOnClose ? isOpen && contentProp.children : contentProp.children}
-        {}
-      </div>
-      {/* 隐藏按钮 */}
-      {hiddenSideBar.isShow && (
-        <div
-          className={[
-            'content-operation transform-x_time',
-            isOpen ? 'transform_in' : 'left-transform_out_optBtn',
-          ].join(' ')}
-        >
-          {hiddenSideBar.isShowDecoratorBar &&
-            (hiddenSideBar.decoratorChildren || (
-              <div className="content-decorator-line color-side-line" />
-            ))}
-          <div
-            className="content-operation-btn"
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            {!isOpen ? (
-              <img
-                src={hiddenSideBar.btnOpenImgUrl || imgObj.open}
-                alt="开启"
-              />
-            ) : (
-              <img
-                src={hiddenSideBar.btnCloseImgUrl || imgObj.close}
-                alt="关闭"
-              />
-            )}
-          </div>
-        </div>
-      )}
-      {/* 左侧左下角图例区域 */}
-      <div
-        className={[
-          'content_left_legend transform-x_time',
-          isOpen ? '' : 'transform_in',
-        ].join(' ')}
-      >
-        {legendProp?.content.length > 0 &&
-          legendProp?.content.map((item) => (
-            <div style={{ ...item?.style, position: 'absolute' }}>
-              {' '}
-              {item.children}
-            </div>
-          ))}
-      </div>
-    </Wrapper>
-  );
-};
-
 const Wrapper = styled.div<{
   marginLeft: number;
   contentWidth: number;
@@ -227,5 +87,145 @@ const Wrapper = styled.div<{
     );
   }
 `;
+/**
+ * children legend组件
+ * contentProp
+ */
+interface LeftComProps {
+  /**
+   * 是否在收起时销毁传进去的子组件
+   */
+  destroyOnClose?: boolean; // 收起的时候是否销毁children元素
+  /**
+   * 最外层样式修正
+   */
+  outerStyle?: React.CSSProperties;
+  contentProp: {
+    // 内容部分的组件
+    width?: number; // 内容部分宽度
+    height?: number; // 内容部分高度
+    children: JSX.Element | null; // 内容组件
+    style?: React.CSSProperties; // content 样式
+  };
+  legendProp?: {
+    // 左侧legend
+    marginLeft: number; // legend距离内容的距离
+    content: {
+      children: JSX.Element | null; // 内容组件
+      style?: React.CSSProperties; // 其他样式
+    }[];
+  };
+  hiddenSideBar?: {
+    isShow?: boolean; // 是否展示
+    isShowDecoratorBar?: boolean; // 是否展示装饰条
+    decoratorChildren?: JSX.Element | null; // 按钮组件
+    btnOpenImgUrl?: string; // 组件
+    btnCloseImgUrl?: string; // 组件
+  }; // 收缩按钮的内容
+  isHideLeft?: boolean; // 是否隐藏侧边栏
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  handleLeftShowChange?: Function; // 侧边栏展开或者显示的回调函数
+}
+// 左侧样式框架
+const LeftCom = ({
+  outerStyle = {},
+  destroyOnClose = false,
+  contentProp = {
+    children: null,
+    style: {},
+  },
+  legendProp = {
+    marginLeft: 0,
+    content: [],
+  },
+  hiddenSideBar = {
+    isShow: false,
+    decoratorChildren: null,
+    isShowDecoratorBar: true,
+  },
+  isHideLeft,
+  handleLeftShowChange,
+}: LeftComProps) => {
+  const [isOpen, setIsOpen] = useSafeState(true);
+  useUpdateEffect(() => {
+    if (isHideLeft !== undefined) setIsOpen(!isHideLeft);
+  }, [isHideLeft]);
+  useUpdateEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    handleLeftShowChange && handleLeftShowChange(isOpen);
+  }, [isOpen]);
+
+  const imgObj = {
+    open: require('./images/open.png'),
+    close: require('./images/close.png'),
+  };
+
+  return (
+    <Wrapper
+      style={outerStyle}
+      marginLeft={legendProp?.marginLeft || 0}
+      isOpen={isOpen}
+      contentWidth={contentProp.width || 480}
+      contentHeight={contentProp.height || 960}
+    >
+      <div
+        className={[
+          `content transform-x_time`,
+          isOpen ? 'transform_in' : 'left-transform_out',
+        ].join(' ')}
+        style={contentProp.style}
+      >
+        {destroyOnClose ? isOpen && contentProp.children : contentProp.children}
+        {}
+      </div>
+      {/* 隐藏按钮 */}
+      {hiddenSideBar.isShow && (
+        <div
+          className={[
+            'content-operation transform-x_time',
+            isOpen ? 'transform_in' : 'left-transform_out_optBtn',
+          ].join(' ')}
+        >
+          {hiddenSideBar.isShowDecoratorBar &&
+            (hiddenSideBar.decoratorChildren || (
+              <div className="content-decorator-line color-side-line" />
+            ))}
+          <div
+            className="content-operation-btn"
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            {!isOpen ? (
+              <img
+                src={hiddenSideBar.btnOpenImgUrl || imgObj.open}
+                alt="开启"
+              />
+            ) : (
+              <img
+                src={hiddenSideBar.btnCloseImgUrl || imgObj.close}
+                alt="关闭"
+              />
+            )}
+          </div>
+        </div>
+      )}
+      {/* 左侧左下角图例区域 */}
+      <div
+        className={[
+          'content_left_legend transform-x_time',
+          isOpen ? '' : 'transform_in',
+        ].join(' ')}
+      >
+        {legendProp?.content.length > 0 &&
+          legendProp?.content.map((item, key) => (
+            <div style={{ ...item?.style, position: 'absolute' }} key={key}>
+              {item.children}
+            </div>
+          ))}
+      </div>
+    </Wrapper>
+  );
+};
 
 export default LeftCom;
