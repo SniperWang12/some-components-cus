@@ -1,8 +1,8 @@
 import { useSafeState, useUnmount } from 'ahooks';
 import { Button, message } from 'antd';
-import { LeftCom } from 'dumi123';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { LeftCom } from 'zasv';
 
 const Wrapper = styled.div`
   position: relative;

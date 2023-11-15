@@ -14,7 +14,7 @@
 ## Show
 
 ```jsx
-import { ProgressBar } from 'dumi123';
+import { ProgressBar } from 'zasv';
 
 const ProgressBarInitConf = {
   height: 80,

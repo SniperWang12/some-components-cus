@@ -1,7 +1,7 @@
-# dumi123
+# zasv
 
-[![NPM version](https://img.shields.io/npm/v/dumi123.svg?style=flat)](https://npmjs.org/package/dumi123)
-[![NPM downloads](http://img.shields.io/npm/dm/dumi123.svg?style=flat)](https://npmjs.org/package/dumi123)
+[![NPM version](https://img.shields.io/npm/v/zasv.svg?style=flat)](https://npmjs.org/package/zasv)
+[![NPM downloads](http://img.shields.io/npm/dm/zasv.svg?style=flat)](https://npmjs.org/package/zasv)
 
 A react library developed with dumi
 

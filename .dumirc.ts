@@ -3,6 +3,6 @@ import { defineConfig } from 'dumi';
 export default defineConfig({
   outputPath: 'docs-dist',
   themeConfig: {
-    name: 'dumi123',
+    name: 'zasv',
   },
 });
