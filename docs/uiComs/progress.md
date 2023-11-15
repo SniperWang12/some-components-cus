@@ -78,7 +78,7 @@ export default () => <ProgressBar {...ProgressBarInitConf} />;
 | height `*`             | 组件高度                                         | `number`                     | --          |
 | fontSize `*`           | 字体大小                                         | `number`                     | --          |
 | startTime `*`          | 起始时间                                         | `string YYYY-MM-DD HH:mm:ss` | --          |
-| duration `*`           | 播放时长                                         | `number`                     | --          |
+| duration `*`           | 播放时长 **单位 小时**                           | `number`                     | --          |
 | timeInterval `*`       | 时间间隔**单位分钟，设定每个时间刻度的时间间隔** | `number suggestTimeInterval` | --          |
 | currFrame `*`          | 当前帧数                                         | `number`                     | --          |
 | totalFrame `*`         | 总帧数                                           | `number`                     | --          |
